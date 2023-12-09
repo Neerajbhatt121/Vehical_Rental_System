@@ -3,6 +3,7 @@
 #include <iostream>
 #define GREEN "\033[32m"
 #include "admin.h"
+#include<string>
 #include <fstream>
 #include <cstdlib> // Include the necessary header for rand()
 #include <ctime>   // Include the necessary header for srand() and time()
@@ -22,9 +23,9 @@ class userclass : public type, public userAcc
 {
 public:
     string name, uname, pass;
-    int choice_index;
+    int choice_index , bookNo;
     ifstream sh;
-    string comp, mdl, prc, spd;
+    string comp, mdl, prc, spd , loggedInUsername, loggedInUserID;
 
     // Function to generate a random booking number
     int generateBookingNumber()
@@ -64,51 +65,6 @@ public:
 
         system("PAUSE");
         
-    }
-
-    void booking(const string &loggedInUsername, const string &loggedInUserID, int &choice_index)
-    {
-
-        int choice;
-        int index = 0;
-        cout << "Do You Want To Book?\n";
-        cout << "1. YES\t2. NO\n";
-        cin >> choice;
-        sh.open("storage.db", ios::in);
-        bool found = false;
-
-        if (choice == 1)
-        {
-
-            while (sh >> comp >> mdl >> prc >> spd)
-            {
-                // Validate the selected car index
-                if (index == choice_index)
-                {
-                    // Generate a random booking number
-                    int bookingNumber = generateBookingNumber();
-
-                    // Open the booking database file
-                    ofstream bookingFile("booking.db", ios::app | ios::binary);
-
-                    // Write the booking details (username, userID, car details, and booking number) to the file
-                    bookingFile << loggedInUsername << "\n" << loggedInUserID << "\n"
-                                << comp << "\n" << bookingNumber << endl<<endl;
-
-                    // Close the booking file
-                    bookingFile.close();
-
-                    cout << "Booking successful! Your booking number is: " << bookingNumber << endl;
-                    found = true;
-                    break;
-                }
-                index++;
-            }
-        }
-        if (!found)
-        {
-            cout << "Invalid car index!\n";
-        }
     }
 
     //--------------------//
@@ -204,7 +160,7 @@ public:
                 cout << YELLOW << "  |============================================================================="
                      << "|" << RESET << endl;
                 found = true;
-                break; // Assuming you want to stop searching after finding the first match
+                
             }
         }
 
@@ -255,7 +211,7 @@ public:
         adduserAcc();
     }
 
-    //------------------//
+//-------------------//
 
     void book()
     {
@@ -263,8 +219,106 @@ public:
         system("PAUSE");
         showCarsFromFile();
         car_detail();
-        booking(uname, pass, choice_index);
+        booking(name, uname, choice_index);
     }
+
+    void booking(const string &loggedInUsername, const string &loggedInUserID, int &choice_index)
+    {
+
+        int choice;
+        int index = 0;
+        cout << "Do You Want To Book?\n";
+        cout << "1. YES\t2. NO\n";
+        cin >> choice;
+        sh.open("storage.db", ios::in);
+        bool found = false;
+
+        if (choice == 1)
+        {
+
+            while (sh >> comp >> mdl >> prc >> spd)
+            {
+                // Validate the selected car index
+                if (index == choice_index)
+                {
+                    // Generate a random booking number
+                    int bookingNumber = generateBookingNumber();
+
+                    // Open the booking database file
+                    ofstream bookingFile("booking.db", ios::app | ios::binary);
+
+                    // Write the booking details (username, userID, car details, and booking number) to the file
+                    bookingFile<< loggedInUserID << "   "<< comp<<"   "<<mdl <<"   "<<prc<<"   " << spd << "  " << bookingNumber << endl<<endl;
+ 
+                    // Close the booking file
+                    bookingFile.close();
+
+    cout <<GREEN  <<"================================================================================" << endl;
+            cout << "   <<--Booking successful! Your booking number is:-->> ||  "<<bookingNumber << endl;
+            cout << "================================================================================" << RESET << endl;   
+                    found = true;
+                    break;
+                }
+                index++;
+            }
+        }
+
+        if(choice == 2){
+            cout << RED <<  "==================================================" << endl;
+                    cout << "        <<--NOT BOOKED-->>" << endl;
+                    cout << "==================================================" << RESET << endl;
+        }
+
+        if (!found)
+        {
+            cout << RED <<  "==================================================" << endl;
+                    cout << "        <<--Invalid choice-->>" << endl;
+                    cout << "==================================================" << RESET << endl;
+        }
+    }
+
+    void showTicket(){
+        ifstream sh;
+        int regNo;
+        bool found = false;
+         cout<<"Enter Your Registration no. : ";
+         cin>>regNo;
+         sh.open("booking.db");
+         if (!sh.is_open()){
+        cout << "Error opening booking.db file!" << endl;
+        return;
+    }
+
+            
+         while(sh >> loggedInUserID >> comp >> mdl >> prc >> spd >> bookNo){
+             
+              if(regNo == bookNo){
+            cout<<YELLOW<<"============================================================================\n";
+            cout<<"|"<<RESET<<"                             YOUR TICKED IS HERE                          "<<YELLOW<<"|\n";
+            cout<<YELLOW<<"============================================================================\n";
+            cout<<YELLOW<<"|"<<RESET<<"                                                                           \n";
+            cout<<YELLOW<<"|"<<RESET<<"                   Registion No.  ==== "<< bookNo<<"\n";
+            cout<<YELLOW<<"|"<<RESET<<"                         User Id  ==== "<< loggedInUserID<<"\n";
+            cout<<YELLOW<<"|"<<RESET<<"                         Company  ==== "<< comp<<"\n";
+            cout<<YELLOW<<"|"<<RESET<<"                                                                           \n";
+    cout << YELLOW <<     "|==========================================================================="<< "|" << RESET << endl;
+        cout << YELLOW << "|\t   " << RESET << company.size() + 1 << " | " << comp << " \t| " << prc << "\t| " << spd << " \t| " << mdl << endl;
+        cout << YELLOW << "|==========================================================================="<< "|" << RESET << endl;
+                found = true;
+                break;
+            }      
+        }
+          sh.close();
+          if(!found){
+              cout <<RED << "==================================================" << endl;
+                    cout << "        <<--Invalid choice-->>" << endl;
+                    cout << "==================================================" << RESET << endl;
+          }
+    }
+
+
+//-------------------//
+
 };
 
 #endif

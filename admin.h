@@ -122,15 +122,7 @@ void addCarCompany() {
     AddNewCar();
 }
 
-void addCarToFile(const string& filename) {
-    ofstream file(filename, ios::app);
-    if (file.is_open()) {
-        for (size_t i = 0; i < company.size(); i++) {
-            file << company[i] << " " << model[i] << " " << price[i] << " " << speed[i] << endl;
-        }
-        file.close();
-    }
-}
+
 
 
 };

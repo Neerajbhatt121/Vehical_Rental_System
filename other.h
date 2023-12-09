@@ -41,13 +41,17 @@ void headline2(){
 
 
  void showmenu(){
-    cout<<BLUE<<"=======================================================================\n";
-    cout<<YELLOW<<"\t 1. USER LOGIN                      2. ADMIN LOGIN \n\n";
-    cout<<YELLOW<<"\t 3. SHOW CARS                       4. SEARCH CAR\n\n";
-    cout<<YELLOW<<"\t 5. CREATE USER ACC.                6. EXIT\n\n";
-    cout<<YELLOW<<"\t 7. BOOKING                         8. EXIT\n\n";
+    cout<<BLUE<<"=======================================================================\n\n";
+    cout<<YELLOW<<"\t 1. SHOW CARS                       2. SEARCH CAR\n\n";
+    cout<<YELLOW<<"\t 3. CREATE USER ACC.                4. CREATE ADMIN ACCOUNT\n\n";
+    cout<<YELLOW<<"\t 5. BOOKING                         6. SHOW TICKET\n\n";
+    cout<<YELLOW<<"\t 7. ADD CAR                         8. LOGOUT\n\n";
+
     cout<<BLUE<<"=======================================================================\n\n\n";
  }
+
+
+
 
 
 
