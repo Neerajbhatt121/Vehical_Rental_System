@@ -132,6 +132,7 @@ public:
 
     void Search()
     {
+        trySearch:
         string name;
         system("CLS");
         cout << "SEARCH BY NAME \n";
@@ -169,6 +170,8 @@ public:
             cout << "==================================================" << endl;
             cout << RED << " <<--THIS CAR IS NOT AVAILABLE-->>" << RESET << endl;
             cout << "==================================================" << endl;
+            system("PAUSE");
+            goto trySearch;
         }
     }
 
@@ -215,26 +218,28 @@ public:
 
     void book()
     {
-        system("CLS");
+        
         system("PAUSE");
-        showCarsFromFile();
-        car_detail();
+        
         booking(name, uname, choice_index);
     }
 
     void booking(const string &loggedInUsername, const string &loggedInUserID, int &choice_index)
     {
-
+        retry:
         int choice;
         int index = 0;
-        cout << "Do You Want To Book?\n";
-        cout << "1. YES\t2. NO\n";
+        cout << YELLOW <<"=================================================="<<RESET << endl;
+                cout << "          <<--Do You Want To Book?-->>" << endl;
+                cout << "==================================================" << RESET << endl;
+        cout <<"\t1. YES\t2. NO\n";
         cin >> choice;
         sh.open("storage.db", ios::in);
-        bool found = false;
+        bool found = true;
 
         if (choice == 1)
         {
+            found = false;
 
             while (sh >> comp >> mdl >> prc >> spd)
             {
@@ -252,9 +257,10 @@ public:
  
                     // Close the booking file
                     bookingFile.close();
+                    sh.close();
 
     cout <<GREEN  <<"================================================================================" << endl;
-            cout << "   <<--Booking successful! Your booking number is:-->> ||  "<<bookingNumber << endl;
+            cout << "           <<--Booking successful! Your booking number is:-->> ||  "<<bookingNumber << endl;
             cout << "================================================================================" << RESET << endl;   
                     found = true;
                     break;
@@ -265,15 +271,17 @@ public:
 
         if(choice == 2){
             cout << RED <<  "==================================================" << endl;
-                    cout << "        <<--NOT BOOKED-->>" << endl;
+                    cout << "            <<--NOT BOOKED-->>" << endl;
                     cout << "==================================================" << RESET << endl;
         }
 
         if (!found)
         {
             cout << RED <<  "==================================================" << endl;
-                    cout << "        <<--Invalid choice-->>" << endl;
+                    cout << "             <<--Invalid choice-->>" << endl;
                     cout << "==================================================" << RESET << endl;
+                system("PAUSE");    
+                goto retry;
         }
     }
 
@@ -311,7 +319,7 @@ public:
           sh.close();
           if(!found){
               cout <<RED << "==================================================" << endl;
-                    cout << "        <<--Invalid choice-->>" << endl;
+                    cout << "     <<--Invalid REGISTRATION NO.-->>" << endl;
                     cout << "==================================================" << RESET << endl;
           }
     }

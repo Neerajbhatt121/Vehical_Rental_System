@@ -7,6 +7,7 @@
 #define RESET "\033[0m"
 #define RED "\033[31m"
 #define BLUE "\033[34m"
+#define GREEN "\033[32m"
 using namespace std;
 
 //--------------------------//
@@ -46,6 +47,7 @@ adminAdd<< adminName << "     "<<adminID<<"       " << adminPass << endl;
 void createAdminAcc(){
      
         cout << "Enter Username: ";
+        cin.ignore();
         getline(cin, adminName);
         cout<<"Enter userID: ";
         cin>>adminID;
@@ -57,9 +59,9 @@ void createAdminAcc(){
 }
 
 
-
 void adminlogin(){
-        string  adminname, pass;
+    retry:
+    string  adminname, pass;
     cout<<"\t\tEnter The UserName:  "; cin>>adminname;
     cout<<"\t\tEnter The PassWord:  "; cin>>pass;
 
@@ -83,8 +85,9 @@ void adminlogin(){
          cout << "==================================================" << endl;
     cout << RED << "         <<--LOGIN FAILED-->>" << RESET << endl;
         cout << "=====s=============================================" << endl;
-        
+            goto retry;
         }
+       
     }    
 
 
@@ -94,6 +97,7 @@ void AddNewCar(){
 carAdd << company[i] << "     " << model[i] << "       " << price[i] << "       " << speed[i] << endl;
         }
     carAdd.close();
+     system("main.exe");
 }
 
 void addCarCompany() {

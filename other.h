@@ -41,13 +41,22 @@ void headline2(){
 
 
  void showmenu(){
-    cout<<BLUE<<"=======================================================================\n\n";
-    cout<<YELLOW<<"\t 1. SHOW CARS                       2. SEARCH CAR\n\n";
-    cout<<YELLOW<<"\t 3. CREATE USER ACC.                4. CREATE ADMIN ACCOUNT\n\n";
-    cout<<YELLOW<<"\t 5. BOOKING                         6. SHOW TICKET\n\n";
-    cout<<YELLOW<<"\t 7. ADD CAR                         8. LOGOUT\n\n";
-
-    cout<<BLUE<<"=======================================================================\n\n\n";
+    system("CLS");
+cout<<BLUE<<"   _____________================================================================\n";
+cout<<" _/_|[][][][][] | - -|"<<YELLOW<<"                  :MAIN MENU:                            "<<BLUE<<"|\n";
+cout<<"(      City Bus | - -===========================================================\n";
+cout<<"=--OO-------OO--=dwb\n"<<RESET;
+cout<<BLUE<<"\t========================================================================\n";
+       cout<<"\t|                                                                      |\n";
+cout<<BLUE<<"\t|"<<YELLOW<<"\t 1. SHOW CARS                       2. SEARCH CAR              "<<BLUE<<"|\n";
+       cout<<"\t|                                                                      |\n";
+cout<<BLUE<<"\t|"<<YELLOW<<"\t 3. CREATE USER ACC.                4. CREATE ADMIN ACCOUNT    "<<BLUE<<"|\n";
+       cout<<"\t|                                                                      |\n";
+cout<<BLUE<<"\t|"<<YELLOW<<"\t 5. BOOKING                         6. SHOW TICKET             "<<BLUE<<"|\n";
+       cout<<"\t|                                                                      |\n";
+cout<<BLUE<<"\t|"<<YELLOW<<"\t 7. ADD CAR                         8. LOGOUT                  "<<BLUE<<"|\n";
+      cout<<"\t|                                                                      |\n";
+ cout<<BLUE<<"\t========================================================================\n\n\n";
  }
 
 

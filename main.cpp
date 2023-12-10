@@ -2,12 +2,13 @@
 #include "user.h"
 // #include"admin.h"
 using namespace std;
-
+ 
 int main()
 {
+    retry:
     userclass uc;
     admin ad;
-    retry:
+   
     intro();
 
     int ch;
@@ -21,7 +22,7 @@ int main()
     uc.userLogin();
 
     break;
-    case2:
+    case 2:
     ad.adminlogin();
     break;
 
@@ -36,6 +37,7 @@ int main()
 
 //-------------------------------------------------------//
     Refresh:
+    system("CLS");
     showmenu();
     int cho;
     cin>>cho;
@@ -44,6 +46,7 @@ int main()
         system("CLS");
         uc.showCarsFromFile();
         uc.car_detail();
+        system("PAUSE");
         uc.book();
         system("PAUSE");
         goto Refresh;
@@ -71,6 +74,7 @@ int main()
     case 5:
     uc.showCarsFromFile();
     uc.car_detail();
+    system("PAUSE");
     uc.book();
     system("PAUSE");
     goto Refresh;
@@ -102,7 +106,7 @@ cout<<RED<<"   _____________====================================================
     cout<<"(      City Bus | - -==========================================================\n";
     cout<<"=--OO-------OO--=dwb\n"<<RESET;
     system("PAUSE");
-    goto Refresh;
+    goto retry;
     break;
 
     }
